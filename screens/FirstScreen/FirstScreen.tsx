@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {View, Text, Image, TouchableOpacity} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import LinearGradient from "react-native-linear-gradient";
 import Vector from "../../assets/images/Vector.svg";
 import { RootStackParamList } from "../../navigation/types";
 import { styles } from "./FirstScreen.styles";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Props = {
     navigation: StackNavigationProp<RootStackParamList>;
 };
 
-const MainScreen: React.FC<Props> = ({navigation}) => {
-    const handleStartQuiz = () => {
-        navigation.replace('Quiz');
+const FirstScreen: React.FC<Props> = ({navigation}) => {
+    const handleContinue = async () => {
+        try {
+            const quizAnswers = await AsyncStorage.getItem('quizAnswers');
+            const deepLink = await AsyncStorage.getItem('deepLink');
+            const hasData = !!(quizAnswers && deepLink);
+
+            console.log('Checking data in FirstScreen:', { quizAnswers, deepLink, hasData });
+
+            if (hasData) {
+                // Если есть данные, переходим на Paywall
+                navigation.replace('Paywall');
+            } else {
+                // Если данных нет, переходим на Quiz
+                navigation.replace('Quiz');
+            }
+        } catch (error) {
+            console.error('Error checking data:', error);
+            navigation.replace('Quiz');
+        }
     };
 
     return (
@@ -51,11 +69,11 @@ const MainScreen: React.FC<Props> = ({navigation}) => {
                 </View>
             </View>
 
-            <TouchableOpacity style={styles.button} onPress={handleStartQuiz}>
+            <TouchableOpacity style={styles.button} onPress={handleContinue}>
                 <Text style={styles.buttonText}>Continue</Text>
             </TouchableOpacity>
         </View>
     );
 };
 
-export default MainScreen; 
+export default FirstScreen; 

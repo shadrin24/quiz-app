@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const InitialRouter: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
     useEffect(() => {
         const checkData = async () => {
@@ -18,16 +19,11 @@ const InitialRouter: React.FC = () => {
 
                 console.log('Checking data:', { quizAnswers, deepLink, hasData });
 
-                if (hasData) {
-                    // Если есть данные, переходим на Home
-                    navigation.replace('Home');
-                } else {
-                    // Если данных нет, переходим на Main
-                    navigation.replace('Main');
-                }
+                // Всегда переходим на FirstScreen
+                navigation.navigate('Main');
             } catch (error) {
                 console.error('Error checking data:', error);
-                navigation.replace('Main');
+                navigation.navigate('Main');
             } finally {
                 setIsLoading(false);
             }

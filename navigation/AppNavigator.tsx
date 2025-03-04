@@ -10,15 +10,14 @@ import HomeScreen from "../screens/HomeScreen";
 import QuizAnswers from "../screens/QuizAnswers/QuizAnswers";
 import UTMData from "../screens/UTMData/UTMData";
 import InitialRouter from "../components/InitialRouter";
-import { hasRequiredData } from "../utils/deeplink";
 
 // Описываем возможные экраны
 export type RootStackParamList = {
     Initial: undefined;
     Main: undefined;
-    Home: undefined;
     Quiz: undefined;
     Paywall: undefined;
+    Home: undefined;
     QuizAnswers: {
         answers: Record<number, string>;
     };
@@ -43,8 +42,8 @@ const AppNavigator = () => {
                 <Stack.Screen name="Initial" component={InitialRouter} />
                 <Stack.Screen name="Main" component={FirstScreen} />
                 <Stack.Screen name="Quiz" component={Quiz} />
-                <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Paywall" component={PaywallScreen} />
+                <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="QuizAnswers" component={QuizAnswers} />
                 <Stack.Screen name="UTMData" component={UTMData} />
             </Stack.Navigator>
