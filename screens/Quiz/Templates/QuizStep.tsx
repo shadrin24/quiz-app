@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { NavigationProp } from "@react-navigation/native";
-import { RootStackParamList } from "../../navigation/types";
-import CustomButton from "../../components/CustomButton/CustomButton";
 import { styles } from './QuizStep.styles';
+import CustomButton from "../../../components/CustomButton/CustomButton";
+import { RootStackParamList } from "../../../navigation/types";
 
 interface Props {
     navigation: NavigationProp<RootStackParamList>;

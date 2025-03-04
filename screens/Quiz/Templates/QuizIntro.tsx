@@ -1,9 +1,9 @@
 import React from "react";
 import {View, Text} from "react-native";
 import {NavigationProp} from "@react-navigation/native";
-import {RootStackParamList} from "../../navigation/types";
-import CustomButton from "../../components/CustomButton/CustomButton";
 import { styles } from './QuizIntro.styles';
+import CustomButton from "../../../components/CustomButton/CustomButton";
+import { RootStackParamList } from "../../../navigation/types";
 
 interface Props {
     navigation: NavigationProp<RootStackParamList>;
@@ -43,7 +43,7 @@ const QuizIntro: React.FC<Props> = ({
             </Text>
 
             {text && <Text style={[styles.textRegular, { fontSize: textRegular, lineHeight: textRegular > 20 ? 33 : 20 }]}>{text}</Text>}
-            {!text && 
+            {/* {!text && 
                 <View style={styles.viewText}>
                     <Text style={[styles.textRegular, { fontSize: textRegular, lineHeight: textRegular > 20 ? 33 : 20  }]}>
                         {"Before we start, here's a special offer just for today, only for you:\n"}
@@ -64,7 +64,7 @@ const QuizIntro: React.FC<Props> = ({
                         {"access all our top stock picks."}
                     </Text>
                 </View>
-            }
+            } */}
             <View style={[styles.buttonContainer, { bottom: buttonText === "Next" ? "6%" : "4%" }]}>
                 <CustomButton
                     title={buttonText}
